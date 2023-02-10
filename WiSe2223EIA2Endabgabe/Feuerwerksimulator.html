@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="firework.css">
+  <script src="script.js"></script>
+  <script src="rakete.js"></script>
+</head>
+
+<body>
+  <h1>EIA2 Endabgabe Feuerwerksimulator</h1>
+<form>
+
+  <fieldset id="selector" method="GET"> 
+  <div id="Bedienfeld"> <output id="sliderValue"></output>
+  <input type="text" id="RocketName" placeholder="Name">
+
+  <br>
+
+  <fieldset id="favcolor"> Farbwahl
+    <input type="color" name="favcolor" value="#ff0000">
+    <br>
+  </fieldset>
+
+
+    <fieldset id="Radius"> Radius:
+      <input type="range" min="0" max="100" value="0" step="1">
+      <output id="sliderValueRadius1"></output>
+
+  </fieldset>
+
+  <fieldset id="Lifetime" > Lifetime: 
+    <input type="range" id="lifetime" min="0" max="100" value="0" step="1">
+      <output id="sliderValueLifetime"></output>
+      <br>
+
+
+
+
+  </fieldset>
+
+  <fieldset id="Partikelsystem"> Partikelanzahl:
+     <input type="range" id="partikelanzahl" min="0" max="100" value="0" step="1">
+      <output id="sliderValuePartikelanzahl"></output>
+      <br>
+  
+
+  </fieldset>
+<br>
+<br>
+<br>
+  <div class="dropdown">
+    <span class="dropbtn">Partikleform</span>
+    <div class="dropdown-content">
+      <a id="Kreis"> Kreis</a>
+      <a id="Dreieck"> Dreieck</a>
+      <a id="Herz"> Herz</a>
+    </div>
+  </div>
+  <br>
+  <button id="save">Save</button>
+  <button id="delete">Delete</button>
+</form>
+
+
+
+  </div>
+
+  <canvas id="canvas"> </canvas>
+
+  <div id="server">
+    <h2>Server</h2>
+
+    <p id="serverResponse"></p>
+    <h1>Gespierchte Raketen</h1>
+    <p id="serverResponse2"></p>
+    collection: <input type="text" id="collection" placeholder="Collection">
+    <br>
+    <button id="get">Get</button>
+    <button id="post">Post</button>
+    <button id="put">Put</button>
+    <button id="delete">Delete</button>
+    <button id="refresh">Refresh</button>
+
+
+  </div>
+
+</body>
+
+</html>
