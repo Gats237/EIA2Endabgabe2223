@@ -7,8 +7,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <link rel="stylesheet" href="firework.css">
+  <script src="Moveable.js"></script>
+  <script src="Vector.js"></script>
+  <script src="Explosive.js"></script>
   <script src="script.js"></script>
-  <script src="rakete.js"></script>
 
 </head>
 
@@ -28,7 +30,7 @@
         <input type="text" id="rocket-name">
       </div>
       <div>
-        <label for="num-cicles"> Anzahl der PArtikel</label>
+        <label for="num-cicles"> Anzahl der Partikel</label>
         <input type="number" max="10000" id="num-circles">
       </div>
       <label for="explosion-size"> Größe der Partikel: </label>
@@ -40,8 +42,8 @@
       <div>
 
         <button id="save">Rakete speichern</button>
-        <canvas> </canvas>
-
+        <canvas id="canvas" width="800" height="600"></canvas>
+     
   </form>
 
 
