@@ -1,17 +1,8 @@
 "use strict";
 var Feuerwerksimulator;
 (function (Feuerwerksimulator) {
-    let Firework = [];
-    let RocketName;
-    let color;
-    let Radius;
-    let LifetimeSlider;
-    let ParticleSlider;
-    let moveables = [];
-    // Ausgegebener Wert des Formdata
-    let settings = [];
-    // Racketeninterface
-    window.addEventListener("load", handleLoad);
+    window.addEventListener("load", async (params) => {
+    }, handleLoad);
     function handleLoad(_event) {
         console.log("Start");
         // Aufruf der Funktionen
@@ -22,6 +13,16 @@ var Feuerwerksimulator;
         Feuerwerksimulator.canvas.height = Feuerwerksimulator.canvas.offsetHeight;
         Feuerwerksimulator.canvas.addEventListener("click", readProperties);
     }
+    let explosives = [];
+    let RocketName;
+    let color;
+    let Radius;
+    let LifetimeSlider;
+    let ParticleSlider;
+    let moveables = [];
+    // Ausgegebener Wert des Formdata
+    let settings = [];
+    // Racketeninterface
     //Eventlistener für Canvas
     // Funktionen
     function readProperties(_event) {

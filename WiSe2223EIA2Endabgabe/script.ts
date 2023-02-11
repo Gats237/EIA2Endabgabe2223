@@ -1,28 +1,8 @@
 namespace Feuerwerksimulator {
 
-
-    //Variablen
-   export  let crc2: CanvasRenderingContext2D 
-   export  let canvas: HTMLCanvasElement 
-   
-   let esplosives : explosives[] = [];
-   
-    let RocketName: string;
-    let color: string;
-    let Radius: number;
-    let LifetimeSlider: number;
-    let ParticleSlider: number;
-    let moveables: Moveable[] = [];
-
-// Ausgegebener Wert des Formdata
-    let settings: FormDataEntryValue[]=[];
-
-    // Racketeninterface
-
+  window.addEventListener("load",async (params:type) => {
     
-
-
-    window.addEventListener("load", handleLoad);
+  } handleLoad);
 
     function handleLoad(_event: Event): void {
         console.log("Start");
@@ -40,6 +20,29 @@ namespace Feuerwerksimulator {
     canvas.addEventListener("click",readProperties);
 
     }
+
+    //Variablen
+   export  let crc2: CanvasRenderingContext2D 
+   export  let canvas: HTMLCanvasElement 
+   
+   let explosives : explosives[] = [];
+   
+    let RocketName: string;
+    let color: string;
+    let Radius: number;
+    let LifetimeSlider: number;
+    let ParticleSlider: number;
+    let moveables: Moveable[] = [];
+
+// Ausgegebener Wert des Formdata
+    let settings: FormDataEntryValue[]=[];
+
+    // Racketeninterface
+
+    
+
+
+     
 
     //Eventlistener für Canvas
 
