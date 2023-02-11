@@ -5,7 +5,7 @@ namespace Feuerwerksimulator {
    export  let crc2: CanvasRenderingContext2D 
    export  let canvas: HTMLCanvasElement 
    
-   let Firework: Rakete[] = [];
+   let esplosives : explosives[] = [];
    
     let RocketName: string;
     let color: string;
