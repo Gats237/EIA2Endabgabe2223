@@ -1,6 +1,6 @@
 namespace Feuerwerksimulator {
 
-    export interface Database {
+    export interface Rocket {
 
         //JSON Datenstruktur
         [name: string]: {
@@ -17,28 +17,29 @@ namespace Feuerwerksimulator {
     export async function handleLoad(): Promise<Rocket[]> {
         let response: Response = await fetch("?command=find&collection=dataList");
         let item: string = await response.text();
-       
+       //Any wird verwendet, da die Datenstruktur nicht bekannt ist
         let serverData: any = JSON.parse(item);
         let serverRockets: Rocket[] = [];
-        console.log("async function Server ");
+        console.log("Promise wird ausgeführt");
 
         for (let key in serverData["data"]) {
             console.log(key);
-            let rocket: Rocket = new Rocket(serverData[key].name, serverData[key].particleAmount, serverData[key].color, serverData[key].size, serverData[key].lifetime);
-            serverRockets.push(rocket);
+            serverRockets.push(serverData["data"][key]);
         }
         return serverRockets;
     }
 
     // Raketendaten werden in die Datenbank gespeichert
 
-    export async function handleSave(_rocket: Rocket): Promise<void> {
+    export async function SaveRocket(_rocket: Rocket): Promise<void> {
         let query: URLSearchParams = new URLSearchParams(<any>_rocket);
         query.append("command", "insert");
         query.append("collection", "dataList");
         query.set("data", JSON.stringify(_rocket));
+        //JavaScript Objekt wird in einen String umgewandelt
         console.log("async function Save ");
         let response: Response = await fetch(url + "?" + query.toString());
+        //URl wird erstellt und an den Server geschickt
         let responseText: string = await response.text();
 
 
