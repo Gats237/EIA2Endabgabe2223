@@ -1,37 +1,38 @@
 namespace Feuerwerksimulator {
 
-  window.addEventListener("load",async (params:type) => {
+  window.addEventListener("load",async () => {
+    let serverRockets: Rocket[] = await handleLoad();
+    console.log(serverRockets);
+    serverRockets.forEach(rocket => {
+      addRocket(rocket);
     
-  } handleLoad);
+    });
+  }); 
 
-    function handleLoad(_event: Event): void {
-        console.log("Start");
-        
-        // Aufruf der Funktionen
-        canvas=<HTMLCanvasElement>document.getElementById("canvas");
-        crc2 = <CanvasRenderingContext2D>canvas.getContext("2d")
+
+// Canvas Deklaration  / globaler Scope / müssen überall zugreifbar sein
+
+export let canvas: HTMLCanvasElement =<HTMLCanvasElement>document.getElementById("canvas");
+export let crc2:CanvasRenderingContext2D = <CanvasRenderingContext2D>canvas.getContext("2d")
+export let refreshRate: number = 10;
+setInterval(update, 1000 / refreshRate);
     
 
-    
-    // danach internal size zu match schicken
-    canvas.width = canvas.offsetWidth;
-    canvas.height = canvas.offsetHeight;
    
     canvas.addEventListener("click",readProperties);
 
-    }
+  // HTML Elemente zuweisen
+    let rocketName : HTMLInputElement = <HTMLInputElement>document.getElementById("RocketName");
+    let savedRocktetsselected: HTMLSelectElement= <HTMLSelectElement>document.getElementById("saved-rocktes-selected");
+    let savedRockets: HTMLDivElement= <HTMLDivElement>document.getElementById("saved-rocktes");
+    let rocketName: HTMLInputElement= <HTMLInputElement>document.getElementById("RocketName");
+    let rocketColor: HTMLInputElement= <HTMLInputElement>document.getElementById("rocket-color");
+    
 
-    //Variablen
-   export  let crc2: CanvasRenderingContext2D 
-   export  let canvas: HTMLCanvasElement 
-   
-   let explosives : explosives[] = [];
-   
-    let RocketName: string;
-    let color: string;
-    let Radius: number;
-    let LifetimeSlider: number;
-    let ParticleSlider: number;
+
+
+// Arrays für Raketen und Partikel
+    let explosives : explosives[] = [];
     let moveables: Moveable[] = [];
 
 // Ausgegebener Wert des Formdata
@@ -68,17 +69,8 @@ namespace Feuerwerksimulator {
        console.log("X: " + x + "Y: " + y);
         for (let entry of formData) {
             let RocketName: string = String(formData.get("RocketName"));
-            let color: string = String(formData.get("favcolor"));
-            let Radius: string = String(formData.get("Radius"));
-            let lifetime: string = String(formData.get("lifetime"));
-            let partikelanzahl: string = String(formData.get("partikelanzahl"));
-
-        }
-
-        Firework.push(new Rakete ( RocketName, color, Radius, LifetimeSlider, ParticleSlider, x, y))
-
-    }
-
+            let color: string = String(formData.get("fav
+            
 //function Particlesystem
 
   
@@ -128,4 +120,6 @@ function setBackground(): void {
 
 
 }
+
+    }
 
