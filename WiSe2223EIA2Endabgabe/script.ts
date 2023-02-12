@@ -32,9 +32,19 @@ function createExplosion(_event: MouseEvent): void {
     let y: number = _event.clientY - crc2.canvas.offsetTop;
 
     let explosionPosition: Vector = new Vector(x, y);
-    let explosion: Explosion = //Position und Values 체bergeben
+    let explosion: Explosion = new Explosion(explosionPosition, Number(numCirclesInput.value), colorInput.value, Number(sizeInput.value), Number(lifetimeInput.value));
     explosions.push(explosion);
 }
+
+//Neue Rakete initialisieren
+
+//Click Event für den Button "Rakete speichern"
+
+//Rakete speichern
+
+
+
+
 
 // Hier werden alle explosions und ihre partikel neu gemalt
 function update(): void {
@@ -49,38 +59,13 @@ function update(): void {
             explosion.draw();
         }
     });
+
+
+
+
 }
 
-// Hier sollen die einzelnen abgeschossenen Raketen während ihrer Lebenszeit gespeichert.
-let explosions: Explosion[] = [];
 
-canvas.addEventListener("click", createExplosion);
-
-function createExplosion(_event: MouseEvent): void {
-    // x und y position der maus auf dem canvas werden ausgelesen. Es wird der Offset vom Canvas zum Seitenrand abgezogen
-    let x: number = _event.clientX - crc2.canvas.offsetLeft;
-    let y: number = _event.clientY - crc2.canvas.offsetTop;
-
-    let explosionPosition: Vector = new Vector(x, y);
-    let explosion: Explosion = //Position und Values übergeben
-    explosions.push(explosion);
-}
-
-// Hier werden alle explosions und ihre partikel neu gemalt
-function update(): void {
-    crc2.fillStyle = "rgba(50, 50, 50, 0.05)";
-    crc2.fillRect(0, 0, canvas.width, canvas.height);
-    explosions.forEach((explosion, index) => {
-        // Entferne die Rakete, wenn die Lebenszeit vorbei ist
-        if (explosion.lifetime == 0) {
-            explosions.splice(index, 1);
-            index--;
-        } else {
-            explosion.draw();
-        }
-    });
-}
- 
 
 
 

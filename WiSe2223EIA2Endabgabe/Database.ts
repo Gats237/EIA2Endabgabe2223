@@ -12,8 +12,11 @@ namespace Feuerwerksimulator {
 
     }
 
+    
     let url: string = "https://webuser.hs-furtwangen.de/~pilshenn/Database/index.php";
 
+
+    
     export async function handleLoad(): Promise<Rocket[]> {
         let response: Response = await fetch("?command=find&collection=dataList");
         let item: string = await response.text();
@@ -42,7 +45,7 @@ namespace Feuerwerksimulator {
         //URl wird erstellt und an den Server geschickt
         let responseText: string = await response.text();
 
-
+      
         if (responseText.includes("success")) {
             alert("Daten wurden gespeichert");
         }

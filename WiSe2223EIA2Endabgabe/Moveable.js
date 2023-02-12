@@ -5,13 +5,13 @@ var Feuerwerksimulator;
         position;
         velocity;
         lifetime;
-        conscstructor(_position, _velocity, _lifetime) {
+        constructor(_position, _velocity, _lifetime) {
             this.position = _position;
             this.velocity = _velocity;
             this.lifetime = _lifetime;
         }
         move(_timeslice) {
-            let offset = new Feuerwerksimulator.Vector.copy();
+            let offset = this.velocity.copy();
             offset.scale(_timeslice);
             this.position.add(offset);
             this.lifetime -= _timeslice;
