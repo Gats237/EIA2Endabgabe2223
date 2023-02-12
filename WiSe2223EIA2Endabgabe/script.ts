@@ -1,125 +1,95 @@
 namespace Feuerwerksimulator {
 
-  window.addEventListener("load",async () => {
+  window.addEventListener("load", async () => {
     let serverRockets: Rocket[] = await handleLoad();
-    console.log(serverRockets);
     serverRockets.forEach(rocket => {
-      addRocket(rocket);
-    
+       // Funktion addRockets erstellen und hier einf체gen
     });
-  }); 
+});
 
-
-// Canvas Deklaration  / globaler Scope / müssen überall zugreifbar sein
-
-export let canvas: HTMLCanvasElement =<HTMLCanvasElement>document.getElementById("canvas");
-export let crc2:CanvasRenderingContext2D = <CanvasRenderingContext2D>canvas.getContext("2d")
+export let canvas: HTMLCanvasElement = <HTMLCanvasElement>document.getElementById("canvas");
+export let crc2: CanvasRenderingContext2D = <CanvasRenderingContext2D>canvas.getContext("2d");
 export let refreshRate: number = 10;
-setInterval(update, 1000 / refreshRate);
-    
-
-   
-    canvas.addEventListener("click",readProperties);
-
-  // HTML Elemente zuweisen
-    let rocketName : HTMLInputElement = <HTMLInputElement>document.getElementById("RocketName");
-    let savedRocktetsselected: HTMLSelectElement= <HTMLSelectElement>document.getElementById("saved-rocktes-selected");
-    let savedRockets: HTMLDivElement= <HTMLDivElement>document.getElementById("saved-rocktes");
-    let rocketName: HTMLInputElement= <HTMLInputElement>document.getElementById("RocketName");
-    let rocketColor: HTMLInputElement= <HTMLInputElement>document.getElementById("rocket-color");
-    
+setInterval(update, refreshRate);
 
 
+// Globale Variablen f체r HTML Elemente
+let savedRocketsSelect: HTMLSelectElement = <HTMLSelectElement>document.getElementById("saved-rockets-select");
+let nameInput: HTMLInputElement = <HTMLInputElement>document.getElementById("rocket-name");
+let numCirclesInput: HTMLInputElement = <HTMLInputElement>document.getElementById("num-circles");
+let colorInput: HTMLInputElement = <HTMLInputElement>document.getElementById("explosion-color");
+let sizeInput: HTMLInputElement = <HTMLInputElement>document.getElementById("explosion-size");
+let lifetimeInput: HTMLInputElement = <HTMLInputElement>document.getElementById("explosion-lifetime");
 
-// Arrays für Raketen und Partikel
-    let explosives : explosives[] = [];
-    let moveables: Moveable[] = [];
+// Hier sollen die einzelnen abgeschossenen Raketen w채hrend ihrer Lebenszeit gespeichert.
+let explosions: Explosion[] = [];
 
-// Ausgegebener Wert des Formdata
-    let settings: FormDataEntryValue[]=[];
+canvas.addEventListener("click", createExplosion);
 
-    // Racketeninterface
+function createExplosion(_event: MouseEvent): void {
+    // x und y position der maus auf dem canvas werden ausgelesen. Es wird der Offset vom Canvas zum Seitenrand abgezogen
+    let x: number = _event.clientX - crc2.canvas.offsetLeft;
+    let y: number = _event.clientY - crc2.canvas.offsetTop;
 
-    
+    let explosionPosition: Vector = new Vector(x, y);
+    let explosion: Explosion = //Position und Values 체bergeben
+    explosions.push(explosion);
+}
 
-
-     
-
-    //Eventlistener für Canvas
-
-   
-
-    // Funktionen
-
-    function readProperties (_event: MouseEvent){
-        let formData: FormData = new FormData(document.forms[0]);
-        let rect: DOMRect=canvas.getBoundingClientRect();
-        let x: number =  _event.clientX - rect.left;
-        let y: number = _event.clientY- rect.top;
-
-        console.log(x, y);
-        crc2.save();
-        crc2.beginPath();
-        crc2.arc(x, y, 10, 0, 2 * Math.PI);
-        crc2.fillStyle = "favcolor";
-        crc2.fill();
-        crc2.closePath();
-        crc2.restore();
-
-       console.log("X: " + x + "Y: " + y);
-        for (let entry of formData) {
-            let RocketName: string = String(formData.get("RocketName"));
-            let color: string = String(formData.get("fav
-            
-//function Particlesystem
-
-  
-// Particle erstellen
-
-function createParticle(_quantity: number, _size: number, _mousePositionX: number, _mousePositionY: number, _color: string, _luminance: string, _duration: number, _type: string): void {
-    let origin: Vector = new Vector(_mousePositionX, _mousePositionY);
-    let color: string = _color;
-    let radian: number = (Math.PI * 2) / _quantity;
-    for (let i: number = 0; i < _quantity; i++) {
-      let px: number;
-      let py: number;
-      let velocity: Vector;
-      let particle: Moveable;
-      if (i % 2 == 0) {
-        px = Math.cos(radian * i) * 150 + Math.random() * 20;
-        py = Math.sin(radian * i) * 150 + Math.random() * 20;
-      }
-      else {
-        px = Math.cos(radian * i) * 110 * Math.random() * 2;
-        py = Math.sin(radian * i) * 110 * Math.random() * 2;
-      }
-      velocity = new Vector(px, py);
-      particle = new Particle( origin, velocity, color, Radius, LifetimeSlider,);
-      moveables.push(particle);
-    }
-  }
-    
-//Rakete starten 
-
-function setBackground(): void {
-    crc2.save();
-    crc2.fillStyle = "black";
+// Hier werden alle explosions und ihre partikel neu gemalt
+function update(): void {
+    crc2.fillStyle = "rgba(50, 50, 50, 0.05)";
     crc2.fillRect(0, 0, canvas.width, canvas.height);
-    crc2.restore();
+    explosions.forEach((explosion, index) => {
+        // Entferne die Rakete, wenn die Lebenszeit vorbei ist
+        if (explosion.lifetime == 0) {
+            explosions.splice(index, 1);
+            index--;
+        } else {
+            explosion.draw();
+        }
+    });
+}
+
+// Hier sollen die einzelnen abgeschossenen Raketen während ihrer Lebenszeit gespeichert.
+let explosions: Explosion[] = [];
+
+canvas.addEventListener("click", createExplosion);
+
+function createExplosion(_event: MouseEvent): void {
+    // x und y position der maus auf dem canvas werden ausgelesen. Es wird der Offset vom Canvas zum Seitenrand abgezogen
+    let x: number = _event.clientX - crc2.canvas.offsetLeft;
+    let y: number = _event.clientY - crc2.canvas.offsetTop;
+
+    let explosionPosition: Vector = new Vector(x, y);
+    let explosion: Explosion = //Position und Values übergeben
+    explosions.push(explosion);
+}
+
+// Hier werden alle explosions und ihre partikel neu gemalt
+function update(): void {
+    crc2.fillStyle = "rgba(50, 50, 50, 0.05)";
+    crc2.fillRect(0, 0, canvas.width, canvas.height);
+    explosions.forEach((explosion, index) => {
+        // Entferne die Rakete, wenn die Lebenszeit vorbei ist
+        if (explosion.lifetime == 0) {
+            explosions.splice(index, 1);
+            index--;
+        } else {
+            explosion.draw();
+        }
+    });
+}
+ 
+
+
+
+
+
+
+
+
 }
 
 
-
-    //Event Listener für Mouseposition 
-
-
-
-
-
-
-
-
-}
-
-    }
 

@@ -8,26 +8,27 @@ namespace Feuerwerksimulator {
             this.set(_x, _y);
         }
 
-        public set(_x: number, _y: number): void {
+        // setzt neue Werte für den Vektor
+        set(_x: number, _y: number): void {
             this.x = _x;
             this.y = _y;
         }
 
-        add(_addend: Vector): void {
-            this.x += _addend.x;
-            this.y +=_addend.y;
-        }
-
+        // skaliert die position (kamera bewegt sich auf einen zu oder von einem weg)
         scale(_factor: number): void {
-            this.x *= _factor;
-            this.y *= _factor;
+            this.x = _factor;
+            this.y= _factor;
         }
 
+        // addiert einen Vektor auf den bestehenden Vektor
+        add(_add: Vector): void {
+            this.x += _add.x;
+            this.y += _add.y;
+        }
+
+        // kopiert den Vektor und gibt den neuen zurück
+        copy(): Vector {
+            return new Vector(this.x, this.y);
+        }
     }
-
-
-
-
-
-
-    }
+}

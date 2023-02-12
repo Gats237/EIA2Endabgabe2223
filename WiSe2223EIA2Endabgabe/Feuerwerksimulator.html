@@ -18,41 +18,47 @@
 
 <body>
   <h1>EIA2 Endabgabe Feuerwerksimulator</h1>
-  <form>
 
 
-    <div id="Bedienfeld">
+  <canvas id="canvas" width="600" height="600"></canvas> 
 
+<div id="B">
       <div>
-        <label for="saved-rocktes-select"> Gespierchte Raketen</label>
+        <label for="saved-rocktes-select"> Gespierchte Raketen:</label>
         <select id="saved-rocktes-select"></select>
       </div>
+      <br>
       <div>
-        <label for="rocket-name"> Name der Rakete</label>
+        <label for="rocket-name"> Name der Rakete:</label>
         <input type="text" id="rocket-name">
       </div>
+      <br>
       <div>
-        <label for="rocket-color"> Farbe der Rakete</label>
-        <input type="color" id="rocket-color">
-      <div>
-        <label for="num-cicles"> Anzahl der Partikel</label>
+        <label for="num-cicles"> Anzahl der Partikel:</label>
         <input type="number" max="10000" id="num-circles">
       </div>
+      <br>
+      <div>
       <label for="explosion-size"> Größe der Partikel: </label>
       <input type="number" id="explosion-size">
+    </div>
+      <br>
       <div>
         <label for="explosion-lifetime"> Lebenszeit in Sekunden:</label>
         <input type="number" max="5" explosion-size>
       </div>
+      <br>
       <div>
-
+        <label for="rocket-color"> Farbe der Rakete:</label>
+        <br>
+        <input type="color" id="rocket-color">
+      </div>
+      <br>
+      <div>
         <button id="save">Rakete speichern</button>
-        <canvas id="canvas" width="800" height="600"></canvas>
-     
-  </form>
+      </div>
 
 
-  </div>
 
 </body>
 
